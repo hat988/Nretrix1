@@ -1,1 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nretrix - LinkedIn Sales Funnel Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: #00ccff;
+            text-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #b0c4de;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ccff 0%, #0066ff 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 102, 255, 0.1);
+            color: #00ccff;
+            border: 2px solid #0066ff;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 102, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .laptop-mockup {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #0066ff 0%, #004acc 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 20px 60px rgba(0, 102, 255, 0.3),
+                0 0 100px rgba(0, 204, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .laptop-mockup::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: #1a1a2e;
+            border-radius: 15px;
+        }
+
+        .laptop-mockup i {
+            font-size: 4rem;
+            color: #00ccff;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #00ccff 0%, #0066ff 100%);
+            position: relative;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-section h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 16px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .no-spam {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .feature-item h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .benefits-section h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 80px;
+            font-weight: 700;
+            color: #00ccff;
+            text-shadow: 0 0 30px rgba(0, 204, 255, 0.3);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 76, 204, 0.1) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            box-shadow: 
+                0 20px 60px rgba(0, 102, 255, 0.1),
+                0 0 50px rgba(0, 204, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(0, 204, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 30px 80px rgba(0, 102, 255, 0.2),
+                0 0 80px rgba(0, 204, 255, 0.1);
+            border-color: rgba(0, 204, 255, 0.5);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #00ccff;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+
+        .benefit-card p {
+            color: #b0c4de;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* CTA Sections */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-section.blue {
+            background: linear-gradient(135deg, #00ccff 0%, #0066ff 100%);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            color: #00ccff;
+            text-shadow: 0 0 30px rgba(0, 204, 255, 0.3);
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            color: #b0c4de;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .features-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section h2,
+            .benefits-section h2,
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ccff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Glow effects */
+        .glow {
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in-left">
+                    <h1>Your LinkedIn Profile Is a <span class="highlight">Sales Funnel</span>. Start Using It Like One.</h1>
+                    <p>Book your free strategy call or get a personalized LinkedIn growth guide—100% value, no fluff.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Book My Free Strategy Call</a>
+                        <a href="#guide" class="btn btn-secondary">Get My Free Personalized Guide</a>
+                    </div>
+                </div>
+                <div class="hero-image fade-in-right">
+                    <div class="laptop-mockup glow">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="fade-in-up">
+                <h2>Who We Are and How We Help</h2>
+                <p class="section-subtitle">We use a mix of proven organic frameworks and smart paid strategies to help real estate pros, SaaS founders, and B2B consultants dominate LinkedIn.</p>
+                <p class="no-spam">No bots. No spam. Just a system that works.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item fade-in-up" style="animation-delay: 0.2s;">
+                    <i class="fas fa-building"></i>
+                    <h3>Industry Expertise in Real Estate & B2B</h3>
+                </div>
+                <div class="feature-item fade-in-up" style="animation-delay: 0.4s;">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Organic & Paid Strategy Integration</h3>
+                </div>
+                <div class="feature-item fade-in-up" style="animation-delay: 0.6s;">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Focused on Authentic, Sustainable Growth</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="fade-in-up">Key Benefits of Partnering with Nretrix</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in-up" style="animation-delay: 0.1s;">
+                    <h3>Custom Profile Revamp & Audit</h3>
+                    <p>Make your LinkedIn profile a powerful lead magnet tailored to your niche.</p>
+                </div>
+                
+                <div class="benefit-card fade-in-up" style="animation-delay: 0.2s;">
+                    <h3>Targeted Content Strategy</h3>
+                    <p>Strategic posts designed to engage and convert your ideal audience.</p>
+                </div>
+                
+                <div class="benefit-card fade-in-up" style="animation-delay: 0.3s;">
+                    <h3>1-on-1 Guidance & Reports</h3>
+                    <p>Personalized coaching and monthly performance tracking for ongoing growth.</p>
+                </div>
+                
+                <div class="benefit-card fade-in-up" style="animation-delay: 0.4s;">
+                    <h3>Smart Paid Strategy</h3>
+                    <p>Optimize your reach with campaigns that balance cost and impact effectively.</p>
+                </div>
+                
+                <div class="benefit-card fade-in-up" style="animation-delay: 0.5s;">
+                    <h3>Converting Message Templates</h3>
+                    <p>Proven scripts that turn connections into clients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section 1 -->
+    <section class="cta-section blue" id="guide">
+        <div class="container">
+            <div class="fade-in-up">
+                <h2>Want More Qualified Leads Through LinkedIn Without Doing More?</h2>
+                <p>Grab the exact guide we use to help real estate brokers and B2B founders build inbound pipelines.</p>
+                <a href="#" class="btn btn-secondary glow">
+                    <i class="fas fa-download"></i> Download Free Guide
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section 2 -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="fade-in-up">
+                <h2>Need a Plan You Can Actually Follow?</h2>
+                <p>Book your free strategy call and get a personalized, actionable LinkedIn growth plan.</p>
+                <a href="#contact" class="btn btn-primary glow">Book Your Free Strategy Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section blue">
+        <div class="container">
+            <div class="fade-in-up">
+                <h2>Download the Guide or Book a Call</h2>
+                <p>Choose your path to LinkedIn success with trusted strategies designed for real estate brokers, consultants, and B2B founders.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-secondary glow">
+                        <i class="fas fa-download"></i> Get Free Guide
+                    </a>
+                    <a href="#contact" class="btn btn-primary glow">
+                        <i class="fas fa-phone"></i> Book Strategy Call
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="fade-in-up">
+                <h2 class="text-glow">Contact & Connect with Nretrix</h2>
+                <p>Get in touch to start transforming your LinkedIn into a powerful sales funnel.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');
+            animatedElements.forEach(el => observer.observe(el));
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add subtle parallax effect to hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.1}px)`;
+                }
+            });
+        });
+
+        // Add random glow animation to cards
+        function addRandomGlow() {
+            const cards = document.querySelectorAll('.benefit-card, .feature-item');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = 'pulse 2s ease-in-out infinite alternate';
+                }, index * 200);
+            });
+        }
+
+        // CSS for pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% {
+                    box-shadow: 
+                        0 20px 60px rgba(0, 102, 255, 0.1),
+                        0 0 50px rgba(0, 204, 255, 0.05);
+                }
+                100% {
+                    box-shadow: 
+                        0 25px 70px rgba(0, 102, 255, 0.2),
+                        0 0 60px rgba(0, 204, 255, 0.1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize glow effects after page load
+        window.addEventListener('load', () => {
+            setTimeout(addRandomGlow, 1000);
+        });
+    </script>
+</body>
+</html>
